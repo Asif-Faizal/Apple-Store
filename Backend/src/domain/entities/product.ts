@@ -3,7 +3,6 @@ export interface ProductVariant {
   name: string;
   price: number;
   color: string;
-  images: string[];
 }
 
 export interface Product {
@@ -12,8 +11,10 @@ export interface Product {
   type: 'iPhone' | 'iPad' | 'MacBook';
   basePrice: number;
   description: string;
+  fullDescription: string;
   rating: number;
   isNew: boolean;
   mainImage: string;
+  images: string[];
   variants: ProductVariant[];
 } 
