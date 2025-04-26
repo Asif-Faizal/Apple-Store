@@ -50,7 +50,7 @@ class ThemeProvider with ChangeNotifier {
 class AppTheme {
   static  Color primaryColor = Colors.grey.shade700;
   static Color surfaceColor = Colors.grey.shade50;
-  static Color lightSecondaryColor = Colors.grey.shade200;
+  static Color lightSecondaryColor = Colors.grey.shade500;
   static Color darkSecondaryColor = Colors.grey.shade800;
   static  Color backgroundColor =Colors.grey.shade50;
   static const Color darkBackgroundColor = Color(0xFF000000);

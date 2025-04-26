@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'core/firebase/firebase_options.dart';
+import 'core/firebase/firebase.options.dart';
 import 'providers/search.filter.provider.dart';
 import 'providers/theme.provider.dart';
 import 'providers/auth.provider.dart';

@@ -21,7 +21,7 @@ class AuthProvider with ChangeNotifier {
     });
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       _isLoading = true;
       _error = null;
@@ -29,8 +29,13 @@ class AuthProvider with ChangeNotifier {
 
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      
       if (googleUser == null) {
-        throw Exception('Google Sign-In was aborted');
+        // User canceled the sign-in process
+        _error = "Sign-in canceled";
+        _isLoading = false;
+        notifyListeners();
+        return false;
       }
 
       // Obtain the auth details from the request
@@ -44,9 +49,13 @@ class AuthProvider with ChangeNotifier {
 
       // Sign in to Firebase with the Google credential
       await _auth.signInWithCredential(credential);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      _error = "Authentication error: ${e.message}";
+      return false;
     } catch (e) {
       _error = e.toString();
-      rethrow;
+      return false;
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -65,7 +74,6 @@ class AuthProvider with ChangeNotifier {
       ]);
     } catch (e) {
       _error = e.toString();
-      rethrow;
     } finally {
       _isLoading = false;
       notifyListeners();

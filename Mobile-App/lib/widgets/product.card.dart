@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
                       width: double.infinity,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          color: Theme.of(context).colorScheme.surface,
                           child: const Icon(Icons.image_not_supported),
                         );
                       },

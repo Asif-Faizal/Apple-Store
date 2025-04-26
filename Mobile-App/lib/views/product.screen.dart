@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product.provider.dart';
 import '../providers/product.detail.provider.dart';
+import '../utils/pdf.generator.dart';
+import '../models/product.model.dart';
 
 class ProductScreen extends StatelessWidget {
   final String productId;
@@ -43,9 +45,23 @@ class _ProductScreenContentState extends State<_ProductScreenContent> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(detailProvider.product?.name ?? 'Product Details'),
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
+        ],
       ),
       body: _buildBody(context, detailProvider),
+      bottomNavigationBar: detailProvider.product == null 
+          ? null 
+          : BottomAppBar(
+              color: Theme.of(context).colorScheme.surface,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: ElevatedButton(
+                  onPressed: () => _downloadProductPDF(context, detailProvider.product!),
+                  child: Text('Download as PDF', style: Theme.of(context).textTheme.bodyLarge),
+                ),
+              ),
+            )
     );
   }
 
@@ -78,6 +94,45 @@ class _ProductScreenContentState extends State<_ProductScreenContent> {
       onRefresh: () => detailProvider.refreshProduct(),
       child: _ProductDetailView(detailProvider: detailProvider),
     );
+  }
+
+  Future<void> _downloadProductPDF(BuildContext context, Product product) async {
+    try {
+      // Show loading indicator
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Generating PDF...'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      
+      // Generate PDF file
+      final pdfFile = await PDFGenerator.generateProductPDF(product);
+      
+      // Share the generated PDF
+      await PDFGenerator.sharePDF(pdfFile);
+      if(context.mounted){
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text('PDF saved successfully',style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
+          backgroundColor: Colors.green,
+        ),
+      );
+      }
+    } catch (e) {
+      // Show error message
+      if(context.mounted){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text('Failed to generate PDF',style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
+          backgroundColor: Colors.red,
+        ),
+      );
+      }
+    }
   }
 }
 
@@ -154,7 +209,7 @@ class _ProductDetailView extends StatelessWidget {
                     Expanded(
                       child: Text(
                         product.name,
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
                     if (product.isNew)

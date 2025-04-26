@@ -100,7 +100,7 @@ class AuthScreen extends StatelessWidget {
             child: CustomPaint(
               size: const Size(400, 250),
               painter: SquigglyLinePainter(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
               ),
             ),
           ),
@@ -111,7 +111,7 @@ class AuthScreen extends StatelessWidget {
             child: CustomPaint(
               size: const Size(400, 300),
               painter: SquigglyLinePainter(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
               ),
             ),
           ),
@@ -135,6 +135,7 @@ class AuthScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Spacer(),
+                    Icon(Icons.apple, size: 100,),
                     const Text(
                       'Welcome to Apple Store',
                       style: TextStyle(
