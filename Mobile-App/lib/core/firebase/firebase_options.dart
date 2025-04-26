@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '590572473317',
     projectId: 'apple-store-3afa5',
     storageBucket: 'apple-store-3afa5.firebasestorage.app',
+    androidClientId: '590572473317-gggvuvttorp8t04qrads38bp67hnbe32.apps.googleusercontent.com',
+    iosClientId: '590572473317-umcg8c1g2c8gi8bb0dgh2smictnoqi9k.apps.googleusercontent.com',
     iosBundleId: 'com.example.appleStore',
   );
+
 }
