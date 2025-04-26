@@ -6,6 +6,8 @@ import 'providers/search.filter.provider.dart';
 import 'providers/theme.provider.dart';
 import 'providers/auth.provider.dart';
 import 'providers/product.provider.dart';
+import 'providers/connectivity.provider.dart';
+import 'core/widgets/connectivity_wrapper.dart';
 import 'views/splash.screen.dart';
 
 void main() async {
@@ -21,6 +23,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => SearchFilterProvider()),
+        ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],
       child: const MyApp(),
     ),
@@ -39,6 +42,9 @@ class MyApp extends StatelessWidget {
           title: 'Apple Store',
           theme: themeProvider.themeData,
           home: const SplashScreen(),
+          builder: (context, child) {
+            return ConnectivityWrapper(child: child ?? const SizedBox());
+          },
         );
       },
     );
