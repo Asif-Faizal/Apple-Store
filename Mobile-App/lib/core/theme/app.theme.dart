@@ -87,6 +87,10 @@ class AppTheme {
         ),
       ),
     ),
+    cardTheme: CardTheme(
+      color: Colors.grey.shade50,
+      elevation: 5,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
@@ -154,6 +158,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
+    ),
+    cardTheme: CardTheme(
+      color: const Color.fromARGB(255, 40, 40, 40),
+      elevation: 5,
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(

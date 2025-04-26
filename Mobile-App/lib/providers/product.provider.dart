@@ -12,6 +12,12 @@ class ProductProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String get error => _error;
 
+  String _fixImageUrl(String url) {
+    // Replace localhost or 127.0.0.1 with 10.0.2.2 for Android emulator
+    return url.replaceAll('http://localhost:3000', 'http://10.0.2.2:3000')
+              .replaceAll('http://127.0.0.1:3000', 'http://10.0.2.2:3000');
+  }
+
   Future<void> fetchProducts() async {
     _isLoading = true;
     _error = '';
@@ -22,7 +28,20 @@ class ProductProvider with ChangeNotifier {
       
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        _products = data.map((json) => Product.fromJson(json)).toList();
+        _products = data.map((json) {
+          final product = Product.fromJson(json);
+          // Create a new Product with the fixed image URL
+          return Product(
+            id: product.id,
+            name: product.name,
+            type: product.type,
+            price: product.price,
+            isNew: product.isNew,
+            rating: product.rating,
+            description: product.description,
+            mainImage: _fixImageUrl(product.mainImage),
+          );
+        }).toList();
       } else {
         _error = 'Failed to load products';
       }

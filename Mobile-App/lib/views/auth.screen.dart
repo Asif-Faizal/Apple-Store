@@ -118,7 +118,7 @@ class AuthScreen extends StatelessWidget {
 
                 if (authProvider.isAuthenticated) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>  HomeScreen()));
                   });
                   return const Center(
                     child: CircularProgressIndicator(),
