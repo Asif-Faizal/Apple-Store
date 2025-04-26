@@ -14,7 +14,7 @@ class ProductGrid extends StatelessWidget {
       shouldRebuild: (previous, next) => true, // We want to rebuild when the filtered list changes
       builder: (context, filteredProducts, _) {
         return SliverPadding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 40), // Increased bottom padding to 40px
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

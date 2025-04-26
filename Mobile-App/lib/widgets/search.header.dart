@@ -18,7 +18,7 @@ class SearchHeader extends StatelessWidget {
       selector: (_, provider) => provider.selectedType,
       builder: (context, selectedType, _) {
         return Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: Theme.of(context).colorScheme.surface,
           padding: const EdgeInsets.all(16),
           child: TextField(
             controller: controller,

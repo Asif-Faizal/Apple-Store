@@ -10,11 +10,7 @@ import 'auth.screen.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key}) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // We'll move this to build method
-    });
-  }
+  HomeScreen({super.key});
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -23,7 +19,10 @@ class HomeScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Filter Products'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        title:  Text('Filter Products',style: Theme.of(context).textTheme.titleLarge,),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -76,14 +75,18 @@ class HomeScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    // Fetch products when the widget is first built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      productProvider.fetchProducts();
-    });
+    // Fetch products only if they haven't been fetched yet
+    if (!productProvider.isLoading && productProvider.products.isEmpty && productProvider.error.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        productProvider.fetchProducts();
+      });
+    }
 
     if (!authProvider.isAuthenticated) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AuthScreen()));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const AuthScreen())
+        );
       });
       return const Scaffold(
         body: Center(
@@ -99,28 +102,37 @@ class HomeScreen extends StatelessWidget {
       });
     }
 
-    return SafeArea(
-      child: Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(),
-                child: Text('Apple Store', style: Theme.of(context).textTheme.titleLarge,),
-              ),
-              ListTile(
-                title: Text('Logout', style: Theme.of(context).textTheme.bodyLarge,),
-                onTap: () => authProvider.signOut(),
-                trailing: const Icon(Icons.logout),
-              ),
-            ],
-          ),
+    return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(),
+              child: Text('Apple Store', style: Theme.of(context).textTheme.titleLarge,),
+            ),
+            ListTile(
+              title: Text('Logout', style: Theme.of(context).textTheme.bodyLarge,),
+              onTap: () => authProvider.signOut(),
+              trailing: const Icon(Icons.logout),
+            ),
+          ],
         ),
-        body: CustomScrollView(
+      ),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await productProvider.fetchProducts();
+          if (productProvider.products.isNotEmpty) {
+            searchFilterProvider.filterProducts(productProvider.products);
+          }
+        },
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
-              floating: true,
-              pinned: false,
+              pinned: true,
+              floating: false,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              surfaceTintColor: Colors.transparent,
               expandedHeight: MediaQuery.of(context).size.height * 0.1,
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.2,),
@@ -148,9 +160,23 @@ class HomeScreen extends StatelessWidget {
               pinned: true,
               floating: false,
               delegate: _SliverSearchDelegate(
-                child: SearchHeader(
-                  controller: _searchController,
-                  onFilterTap: () => _showFilterDialog(context),
+                child: Column(
+                  children: [
+                    NotificationListener<ScrollNotification>(
+                      onNotification: (notification) {
+                        return false;
+                      },
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SizedBox();
+                        },
+                      ),
+                    ),
+                    SearchHeader(
+                      controller: _searchController,
+                      onFilterTap: () => _showFilterDialog(context),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -192,9 +218,9 @@ class _SliverSearchDelegate extends SliverPersistentHeaderDelegate {
   _SliverSearchDelegate({required this.child});
 
   @override
-  double get minExtent => 80;
+  double get minExtent => 90;
   @override
-  double get maxExtent => 80;
+  double get maxExtent => 90;
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {

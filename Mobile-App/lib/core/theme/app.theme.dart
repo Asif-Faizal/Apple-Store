@@ -48,10 +48,11 @@ class ThemeProvider with ChangeNotifier {
 }
 
 class AppTheme {
-  static const Color primaryColor = Colors.deepPurpleAccent;
-  static Color lightSecondaryColor = Colors.deepPurple.shade600;
-  static Color darkSecondaryColor = const Color.fromARGB(255, 249, 246, 255);
-  static const Color backgroundColor = Color(0xFFF2F2F7);
+  static  Color primaryColor = Colors.grey.shade700;
+  static Color surfaceColor = Colors.grey.shade50;
+  static Color lightSecondaryColor = Colors.grey.shade200;
+  static Color darkSecondaryColor = Colors.grey.shade800;
+  static  Color backgroundColor =Colors.grey.shade50;
   static const Color darkBackgroundColor = Color(0xFF000000);
   static const Color textColor = Color(0xFF000000);
   static const Color darkTextColor = Color(0xFFFFFFFF);
@@ -63,7 +64,7 @@ class AppTheme {
       primary: primaryColor,
       secondary: lightSecondaryColor,
       background: backgroundColor,
-      surface: Colors.white,
+      surface: surfaceColor,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onBackground: textColor,
@@ -81,7 +82,7 @@ class AppTheme {
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         backgroundColor: lightSecondaryColor,
-        foregroundColor: darkTextColor,
+        foregroundColor: textColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
@@ -122,7 +123,7 @@ class AppTheme {
       labelLarge: GoogleFonts.playfairDisplay(
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: darkTextColor,
+        color: textColor,
       ),
     ),
   );
@@ -143,7 +144,7 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: darkSecondaryColor,
-        foregroundColor: Colors.white,
+        foregroundColor: darkTextColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
@@ -153,7 +154,7 @@ class AppTheme {
       style: IconButton.styleFrom(
         elevation: 5,
         backgroundColor: darkSecondaryColor,
-        foregroundColor: textColor,
+        foregroundColor: darkTextColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
@@ -194,7 +195,7 @@ class AppTheme {
       labelLarge: GoogleFonts.playfairDisplay(
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: textColor,
+        color: darkTextColor,
       ),
     ),
   );
