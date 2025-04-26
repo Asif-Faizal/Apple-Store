@@ -47,8 +47,9 @@ class ThemeProvider with ChangeNotifier {
 }
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF007AFF);
-  static const Color secondaryColor = Color(0xFF5856D6);
+  static const Color primaryColor = Colors.deepPurpleAccent;
+  static Color lightSecondaryColor = Colors.deepPurple.shade600;
+  static Color darkSecondaryColor = const Color.fromARGB(255, 249, 246, 255);
   static const Color backgroundColor = Color(0xFFF2F2F7);
   static const Color darkBackgroundColor = Color(0xFF000000);
   static const Color textColor = Color(0xFF000000);
@@ -59,13 +60,22 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.light(
       primary: primaryColor,
-      secondary: secondaryColor,
+      secondary: lightSecondaryColor,
       background: backgroundColor,
       surface: Colors.white,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onBackground: textColor,
       onSurface: textColor,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: lightSecondaryColor,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
@@ -76,6 +86,11 @@ class AppTheme {
       bodyLarge: TextStyle(
         fontSize: 16,
         color: textColor,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: darkTextColor,
       ),
     ),
   );
@@ -85,13 +100,22 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme.dark(
       primary: primaryColor,
-      secondary: secondaryColor,
+      secondary: darkSecondaryColor,
       background: darkBackgroundColor,
       surface: const Color(0xFF1C1C1E),
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onBackground: darkTextColor,
       onSurface: darkTextColor,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: darkSecondaryColor,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
@@ -102,6 +126,11 @@ class AppTheme {
       bodyLarge: TextStyle(
         fontSize: 16,
         color: darkTextColor,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: textColor,
       ),
     ),
   );
