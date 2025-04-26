@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const productService_1 = require("../../application/services/productService");
 const router = express_1.default.Router();
-const productService = new productService_1.ProductService(process.env.BASE_URL || 'http://localhost:3000');
+const productService = new productService_1.ProductService(process.env.BASE_URL || 'http://127.0.0.1:3000');
 router.get('/products', (_req, res) => {
     try {
         const products = productService.getProductList();

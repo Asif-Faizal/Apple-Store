@@ -14,7 +14,7 @@ class Server {
   constructor() {
     this.app = express();
     this.port = parseInt(process.env.PORT || '3000', 10);
-    this.baseUrl = `http://localhost:${this.port}`;
+    this.baseUrl = `http://127.0.0.1:${this.port}`;
     this.productService = new ProductService(this.baseUrl);
     this.middlewares();
     this.routes();

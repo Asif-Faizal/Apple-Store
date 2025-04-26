@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'core/firebase/firebase_options.dart';
 import 'providers/theme.provider.dart';
 import 'providers/auth.provider.dart';
+import 'providers/product.provider.dart';
 import 'views/splash.screen.dart';
 
 void main() async {
@@ -15,8 +16,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
       child: const MyApp(),
     ),

@@ -2,7 +2,7 @@ import express, { Router, Request, Response } from 'express';
 import { ProductService } from '../../application/services/productService';
 
 const router: Router = express.Router();
-const productService = new ProductService(process.env.BASE_URL || 'http://localhost:3000');
+const productService = new ProductService(process.env.BASE_URL || 'http://127.0.0.1:3000');
 
 /**
  * @swagger

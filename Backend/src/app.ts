@@ -15,5 +15,5 @@ app.use('/api', productRoutes);
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  console.log(`API endpoints available at http://localhost:${port}/api/products`);
+  console.log(`API endpoints available at http://127.0.0.1:${port}/api/products`);
 }); 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../storage/shared.preferences.helper.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -77,17 +78,44 @@ class AppTheme {
         ),
       ),
     ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        backgroundColor: lightSecondaryColor,
+        foregroundColor: darkTextColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: lightSecondaryColor,width: 0.5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: lightSecondaryColor,width: 2),
+      ),enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: lightSecondaryColor,width: 0.5),
+      ),
+    ),
+    textTheme: TextTheme(
+      displayLarge: GoogleFonts.poppins(
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: textColor,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: GoogleFonts.playfairDisplay(
         fontSize: 16,
         color: textColor,
       ),
-      labelLarge: TextStyle(
+      titleLarge: GoogleFonts.playfairDisplay(
+        fontSize: 24,
+        color: textColor,
+        fontWeight: FontWeight.bold,
+      ),
+      labelLarge: GoogleFonts.playfairDisplay(
         fontSize: 14,
         fontWeight: FontWeight.bold,
         color: darkTextColor,
@@ -117,17 +145,45 @@ class AppTheme {
         ),
       ),
     ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        elevation: 5,
+        backgroundColor: darkSecondaryColor,
+        foregroundColor: textColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: darkSecondaryColor,width: 0.5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: darkSecondaryColor,width: 2),
+      ),enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(color: darkSecondaryColor,width: 0.5),
+      ),
+    ),
+    textTheme: TextTheme(
+      displayLarge: GoogleFonts.poppins(
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: darkTextColor,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: GoogleFonts.playfairDisplay(
         fontSize: 16,
         color: darkTextColor,
       ),
-      labelLarge: TextStyle(
+      titleLarge: GoogleFonts.playfairDisplay(
+        fontSize: 24,
+        color: darkTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+      labelLarge: GoogleFonts.playfairDisplay(
         fontSize: 14,
         fontWeight: FontWeight.bold,
         color: textColor,

@@ -13,6 +13,6 @@ app.use(express_1.default.json());
 app.use('/api', productRoutes_1.default);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-    console.log(`API endpoints available at http://localhost:${port}/api/products`);
+    console.log(`API endpoints available at http://127.0.0.1:${port}/api/products`);
 });
 //# sourceMappingURL=app.js.map
